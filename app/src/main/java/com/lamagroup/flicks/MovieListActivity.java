@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.lamagroup.flicks.models.Config;
 import com.lamagroup.flicks.models.Movie;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -42,6 +43,8 @@ public class MovieListActivity extends AppCompatActivity {
     RecyclerView rvMovies;
     // theadapter wired to the recycle view
     MovieAdapter adapter;
+    // config image
+    Config config;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +87,7 @@ public class MovieListActivity extends AppCompatActivity {
                         Movie movie = new Movie(results.getJSONObject(i));
                         movies.add(movie);
                         // notify adapter that a row was added
-                        adapter.notifyItemInserted(movies.size() -1);
+                        adapter.notifyItemInserted(movies.size()-1);
                     }
 
                     Log.i(TAG, String.format("Loaded %s movies", results.length()));
@@ -111,12 +114,13 @@ public class MovieListActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    JSONObject images = response.getJSONObject("images");
-                    imageBaseUrl = images.getString("secure_base_url");
-                    JSONArray posterSizeOptions = images.getJSONArray("poster_sizes");
-                    posterSize = posterSizeOptions.optString(3,"w342");
-                    Log.i(TAG , String.format("Loaded configuration from imageBaseUrl %s and poster Size %s",
-                            imageBaseUrl, posterSize));
+                    config = new Config(response);
+                    Log.i(TAG ,
+                            String.format("Loaded configuration from imageBaseUrl %s and poster Size %s",
+                            config.getImageBaseUrl(), config.getPosterSize()));
+                   //  pass config to adapter
+                    adapter.setConfig(config);
+
                     // get now playing list
                     getNowPlaying();
                 } catch (JSONException e) {
