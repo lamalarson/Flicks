@@ -14,12 +14,16 @@ public class Movie {
     public String overview;
     public String posterpath;
     public String backdroppath;
+    Double voteAverage;
+    public String tubePath;
 
     public Movie(JSONObject object) throws JSONException {
         title = object.getString("title");
         overview = object.getString("overview");
         posterpath = object.getString("poster_path");
         backdroppath = object.getString("backdrop_path");
+        voteAverage = object.getDouble("vote_average");
+
     }
     // no-arg, empty constructor required for Parceler
     public Movie() {}
@@ -35,5 +39,7 @@ public class Movie {
         return posterpath;
     }
 
-    public String getBackdroppath() {        return backdroppath;    }
+    public String getBackdroppath() { return backdroppath;    }
+
+    public Double getVoteAverage() {  return voteAverage;    }
 }

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@android:color/holo_blue_light"
+    android:backgroundTint="@android:color/holo_blue_light"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.lamagroup.flicks.MovieListActivity">
@@ -14,7 +14,7 @@
         android:layout_alignParentLeft="true"
         android:clipChildren="true"
         android:clipToPadding="true"
-        tools:ignore="RtlHardcoded,UnknownId"
+        tools:ignore="RtlHardcoded,UnknownId,UnknownIdInLayout"
         android:layout_below="@+id/toolbar" />
 
 </RelativeLayout>

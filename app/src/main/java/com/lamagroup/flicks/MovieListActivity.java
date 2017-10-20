@@ -103,6 +103,7 @@ public class MovieListActivity extends AppCompatActivity {
         });
     }
 
+
     public void getConfiguration(){
         // create the url
         String url = API_BASE_URL + "/configuration";
